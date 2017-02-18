@@ -1,33 +1,33 @@
 window.onload = () => {
-  let canvas = document.getElementById("canvas");
-  let context = canvas.getContext("2d");
-  let canvasWidth = canvas.width;
-  let canvasHeight = canvas.height;
+  const canvas = document.getElementById("canvas");
+  const context = canvas.getContext("2d");
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
   // Image Data (RGBA)
-  let canvasData = context.createImageData(canvasWidth, canvasHeight);
+  const canvasData = context.createImageData(canvasWidth, canvasHeight);
   // Pan and zoom parameters
   let offsetX = -(canvasWidth / 2);
   let offsetY = -(canvasHeight / 2);
   let panX = -100;
   let panY = 0;
   let zoom = 200;
-  let colors = [];
+  const colors = [];
   // number of total iterations per pixel
-  let maxIterations = 40;
+  const maxIterations = 40;
 
-  let startFractaling = () => {
+  const startFractaling = () => {
     canvas.addEventListener("mousedown", mouseDownHandler);
     generateColors();
     generateImage();
     startLoop(0);
   }
 
-  let startLoop = (tframe) => {
+  const startLoop = (tframe) => {
     window.requestAnimationFrame(startLoop);
     context.putImageData(canvasData, 0, 0);
   }
 
-  let generateColors = () => {
+  const generateColors = () => {
     let redOffset = 0;
     let greenOffset = 20;
     let blueOffset = 100;
@@ -44,7 +44,7 @@ window.onload = () => {
     }
   }
 
-  let generateImage = () => {
+  const generateImage = () => {
     for (let y = 0; y < canvasHeight; y++) {
       for (let x = 0; x < canvasWidth; x++) {
         iterate(x, y, maxIterations);
@@ -53,7 +53,7 @@ window.onload = () => {
   }
 
   // Calculate the color of a specific pixel
-  let iterate = (x, y, maxIterations) => {
+  const iterate = (x, y, maxIterations) => {
     // Convert the screen coordinate to a fractal coordinate
     let x0 = (x + offsetX + panX) / zoom;
     let y0 = (y + offsetY + panY) / zoom;
@@ -88,7 +88,7 @@ window.onload = () => {
     canvasData.data[pixelIndex + 3] = 255;
   }
 
-  let zoomInOnFractal = (x, y, multiplier, zoomIn) => {
+  const zoomInOnFractal = (x, y, multiplier, zoomIn) => {
     if (zoomIn) {
       zoom *= multiplier;
       panX = multiplier * (x + offsetX + panX);
@@ -101,9 +101,8 @@ window.onload = () => {
   }
 
   // Mouse event handlers
-  let mouseDownHandler = (e) => {
-    debugger
-    let pos = getMouseDownPosition(canvas, e);
+  const mouseDownHandler = (e) => {
+    const pos = getMouseDownPosition(canvas, e);
     // zoom out with ctrl
     let zoomIn = true;
     if (e.ctrlKey) {
@@ -119,8 +118,8 @@ window.onload = () => {
     generateImage();
   }
 
-  let getMouseDownPosition = (canvas, e) => {
-    let rect = canvas.getBoundingClientRect();
+  const getMouseDownPosition = (canvas, e) => {
+    const rect = canvas.getBoundingClientRect();
     return {
       x: Math.round((e.clientX - rect.left)/(rect.right - rect.left)*canvas.width),
       y: Math.round((e.clientY - rect.top)/(rect.bottom - rect.top)*canvas.height)
