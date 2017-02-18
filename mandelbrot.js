@@ -16,7 +16,7 @@ window.onload = () => {
   let maxIterations = 40;
 
   let startFractaling = () => {
-    canvas.addEventListener("mousedown", onMouseDown);
+    canvas.addEventListener("mousedown", mouseDownHandler);
     generateColors();
     generateImage();
     startLoop(0);
@@ -88,7 +88,6 @@ window.onload = () => {
     canvasData.data[pixelIndex + 3] = 255;
   }
 
-  // Zoom the fractal
   let zoomInOnFractal = (x, y, multiplier, zoomIn) => {
     if (zoomIn) {
       zoom *= multiplier;
@@ -102,7 +101,7 @@ window.onload = () => {
   }
 
   // Mouse event handlers
-  let onMouseDown = (e) => {
+  let mouseDownHandler = (e) => {
     debugger
     let pos = getMouseDownPosition(canvas, e);
     // zoom out with ctrl
@@ -120,7 +119,6 @@ window.onload = () => {
     generateImage();
   }
 
-  // Get the mouse position
   let getMouseDownPosition = (canvas, e) => {
     let rect = canvas.getBoundingClientRect();
     return {
