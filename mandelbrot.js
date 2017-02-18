@@ -28,20 +28,20 @@ window.onload = () => {
   }
 
   let generateColors = () => {
-      let redOffset = 0;
-      let greenOffset = 20;
-      let blueOffset = 100;
+    let redOffset = 0;
+    let greenOffset = 20;
+    let blueOffset = 100;
 
-      for (let i = 0; i < 256; i++) {
-        colors[i] = { r: redOffset, g: greenOffset, b: blueOffset };
-        if (i < 64) {
-          redOffset += 2;
-        } else if (i < 128) {
-          greenOffset += 3;
-        } else if (i < 192) {
-          blueOffset += 10;
-        }
+    for (let i = 0; i < 256; i++) {
+      colors[i] = { r: redOffset, g: greenOffset, b: blueOffset };
+      if (i < 64) {
+        redOffset += 2;
+      } else if (i < 128) {
+        greenOffset += 3;
+      } else if (i < 192) {
+        blueOffset += 10;
       }
+    }
   }
 
   let generateImage = () => {
